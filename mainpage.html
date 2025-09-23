@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sea Waste & Plant Health Monitoring</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    .section-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      height: 100%;
+    }
+    .video-box {
+      width: 100%;
+      height: 250px;
+      background: black;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .alert-custom {
+      background-color: #ff3c6a;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 10px;
+    }
+    .plant-health {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .plant-img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid py-4">
+    <h1 class="text-center mb-4 fw-bold">🌊 Sea Waste & Plant Health Monitoring</h1>
+
+    <div class="row g-4">
+      <!-- TOP LEFT: Plant Camera -->
+      <div class="col-lg-6">
+        <div class="section-card text-center">
+          <h4><i class="bi bi-camera-video-fill"></i> Drone Camera 1 (Plant Monitoring)</h4>
+          <div class="video-box my-2">
+            <video width="100%" height="100%" autoplay muted loop>
+              <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+            </video>
+          </div>
+          <button class="btn btn-success fw-bold" onclick="generatePlantHealth()">🌱 Analyze Plant</button>
+        </div>
+      </div>
+
+      <!-- TOP RIGHT: Plant Health Info -->
+      <div class="col-lg-6">
+        <div class="section-card">
+          <h4 class="text-center"><i class="bi bi-flower1"></i> Plant Health Details</h4>
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <img id="plantImage" src="https://blueworldgardener.co.uk/wp-content/uploads/2021/08/Egeria_densa__oxygenerator-1.jpg" class="plant-img" alt="Plant">
+            </div>
+            <div class="col-md-6">
+              <div class="plant-health">🌡️ Temperature: <span id="temp"></span> °C</div>
+              <div class="plant-health">💧 Moisture: <span id="moisture"></span> %</div>
+              <div class="plant-health">⚗️ pH Level: <span id="ph"></span></div>
+              <div class="plant-health">☀️ Sunlight: <span id="sunlight"></span> lux</div>
+              <hr>
+              <div class="plant-health">🌱 Overall Health: <span id="status" class="fw-bold"></span></div>
+              <div class="progress mt-2">
+                <div id="healthBar" class="progress-bar bg-success" style="width: 80%;">80%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM LEFT: Plastic Camera -->
+      <div class="col-lg-6">
+        <div class="section-card text-center">
+          <h4><i class="bi bi-camera-video"></i> Drone Camera 2 (Plastic Detection)</h4>
+          <div class="video-box my-2">
+            <video width="100%" height="100%" autoplay muted loop>
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+          </div>
+          <button class="btn btn-danger fw-bold" onclick="detectPlastic()">🔎 Detect Plastic</button>
+        </div>
+      </div>
+
+      <!-- BOTTOM RIGHT: Plastic Results -->
+      <div class="col-lg-6">
+        <div class="section-card">
+          <h4 class="text-center"><i class="bi bi-exclamation-triangle"></i> Plastic Detection Results</h4>
+          <div id="plasticResult" class="text-center mt-3">
+            <p>No detection yet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Coastal River Lake Protection | Built with ❤️
+  </footer>
+
+  <!-- Script -->
+  <script>
+    // Plastic Detection
+    function detectPlastic() {
+      const detected = Math.random() > 0.5; // Random yes/no
+      let resultDiv = document.getElementById("plasticResult");
+
+      if (detected) {
+        // Random plastic type
+        const types = ["PET Bottle", "Plastic Bag", "Styrofoam", "Fishing Net", "Microplastic"];
+        const dangers = ["High", "Medium", "Severe", "Low", "Moderate"];
+        const chosen = Math.floor(Math.random() * types.length);
+
+        resultDiv.innerHTML = `
+          <div class="alert-custom">🚨 Plastic Detected! Immediate Action Required!</div>
+          <p>Detected at <b>${new Date().toLocaleTimeString()}</b></p>
+          <hr>
+          <p><b>Type:</b> ${types[chosen]}</p>
+          <p><b>Estimated Size:</b> ${Math.floor(Math.random()*50)+5} cm</p>
+          <p><b>Danger Level:</b> ${dangers[chosen]}</p>
+        `;
+      } else {
+        resultDiv.innerHTML = `
+          <div class="alert alert-success">✅ No Plastic Detected</div>
+          <p>Checked at <b>${new Date().toLocaleTimeString()}</b></p>
+        `;
+      }
+    }
+
+    // Plant Health
+    function generatePlantHealth() {
+      let temp = Math.floor(Math.random() * 15) + 20;
+      let moisture = Math.floor(Math.random() * 50) + 30;
+      let ph = (Math.random() * (8 - 5) + 5).toFixed(1);
+      let sunlight = Math.floor(Math.random() * 1000) + 300;
+
+      document.getElementById("temp").innerText = temp;
+      document.getElementById("moisture").innerText = moisture;
+      document.getElementById("ph").innerText = ph;
+      document.getElementById("sunlight").innerText = sunlight;
+
+      let score = 100;
+      if (temp < 22 || temp > 32) score -= 20;
+      if (moisture < 40 || moisture > 70) score -= 20;
+      if (ph < 6 || ph > 7.5) score -= 20;
+      if (sunlight < 400 || sunlight > 1000) score -= 20;
+
+      let statusEl = document.getElementById("status");
+      let barEl = document.getElementById("healthBar");
+
+      if (score > 80) {
+        statusEl.innerText = "Healthy";
+        statusEl.className = "fw-bold text-success";
+        barEl.className = "progress-bar bg-success";
+      } else if (score > 50) {
+        statusEl.innerText = "Moderate";
+        statusEl.className = "fw-bold text-warning";
+        barEl.className = "progress-bar bg-warning";
+      } else {
+        statusEl.innerText = "Unhealthy";
+        statusEl.className = "fw-bold text-danger";
+        barEl.className = "progress-bar bg-danger";
+      }
+
+      barEl.style.width = score + "%";
+      barEl.innerText = score + "%";
+
+      // Prevent disappearance: set default image as fallback
+      let imgList = [
+        "https://source.unsplash.com/400x300/?plant,green",
+        "https://source.unsplash.com/400x300/?plant,leaf",
+        "https://source.unsplash.com/400x300/?tree,leaf",
+        "https://source.unsplash.com/400x300/?crop,plant"
+      ];
+      let newImg = imgList[Math.floor(Math.random() * imgList.length)];
+      let imgEl = document.getElementById("plantImage");
+      imgEl.onerror = function() {
+        imgEl.src = "https://blueworldgardener.co.uk/wp-content/uploads/2021/08/Egeria_densa__oxygenerator-1.jpg";
+      };
+      imgEl.src = newImg;
+    }
+  </script>
+</body>
+</html>
