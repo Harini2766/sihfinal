@@ -157,9 +157,10 @@ function App() {
 
   return (
     <div className="container-fluid py-4">
-      <h1 className="text-center fw-bold">
-        🌊 Sea Waste & Plant Health Monitoring
+      <h1 className="text-center fw-bold" style={{ color: "#c2decfff" }}>
+          AQUAPHYLL
       </h1>
+
       <div className="row g-4">
         {/* Plant Camera */}
         <div className="col-lg-6">
@@ -195,18 +196,12 @@ function App() {
                 <img src={plantImg} className="plant-img" alt="Plant" />
               </div>
               <div className="col-md-6">
+                
+                
                 <div className="plant-health">
-                  🌡 Temperature: <span>{temp}</span> °C
+                 RF INDEX:0.80
                 </div>
-                <div className="plant-health">
-                  💧 Moisture: <span>{moisture}</span> %
-                </div>
-                <div className="plant-health">
-                  ⚗ pH Level: <span>{ph}</span>
-                </div>
-                <div className="plant-health">
-                  ☀ Sunlight: <span>{sunlight}</span> lux
-                </div>
+               
                 <hr />
                 <div className="plant-health">
                   🌱 Overall Health:{" "}
